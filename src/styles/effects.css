@@ -1,0 +1,293 @@
+/*
+ * Decorative brand effects. Kept as named utilities so components share one
+ * implementation instead of re-deriving gradients and masks.
+ */
+
+/* Fire gradient used for accent words in headings ("WORLDS"). */
+@utility text-gradient-accent {
+  background-image: linear-gradient(
+    180deg,
+    var(--accent-highlight) 0%,
+    var(--accent-primary) 45%,
+    var(--accent-primary-strong) 100%
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+/* Orange fill for primary actions. */
+@utility bg-gradient-accent {
+  background-image: linear-gradient(
+    180deg,
+    var(--accent-highlight) 0%,
+    var(--accent-primary) 40%,
+    var(--accent-primary-strong) 100%
+  );
+}
+
+/* Hero side art: fade toward the centre and bottom so the text stays legible. */
+@utility mask-fade-to-right {
+  mask-image:
+    linear-gradient(to right, #000 45%, transparent 100%),
+    linear-gradient(to bottom, #000 70%, transparent 100%);
+  mask-composite: intersect;
+}
+
+@utility mask-fade-to-left {
+  mask-image:
+    linear-gradient(to left, #000 45%, transparent 100%),
+    linear-gradient(to bottom, #000 70%, transparent 100%);
+  mask-composite: intersect;
+}
+
+/* ---- Coming-soon backdrop ---------------------------------------------- */
+
+@utility backdrop-glow {
+  background:
+    radial-gradient(
+      60% 45% at 50% 42%,
+      color-mix(in srgb, var(--accent-primary) 13%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      40% 30% at 50% 100%,
+      color-mix(in srgb, var(--accent-cool-bright) 18%, transparent),
+      transparent 70%
+    );
+}
+
+/* Perspective grid floor scrolling toward the viewer. */
+@utility grid-floor {
+  left: -50%;
+  right: -50%;
+  bottom: 0;
+  height: 55%;
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--accent-primary) 35%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--accent-primary) 35%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 64px 64px;
+  transform: perspective(420px) rotateX(62deg);
+  transform-origin: bottom center;
+  mask-image: linear-gradient(to top, #000 10%, transparent 85%);
+  animation: grid-scroll 1.6s linear infinite;
+}
+
+@keyframes grid-scroll {
+  to {
+    background-position: 0 64px;
+  }
+}
+
+@utility scanlines {
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--text-primary) 3.5%, transparent) 0 1px,
+    transparent 1px 4px
+  );
+}
+
+/* Glitch: two offset, clipped copies of the text taken from data-text. */
+@utility glitch-text {
+  position: relative;
+  text-shadow: 0 0 32px
+    color-mix(in srgb, var(--accent-primary) 25%, transparent);
+
+  &::before,
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  &::before {
+    color: var(--accent-cool-bright);
+    transform: translateX(-3px);
+    animation: glitch-a 3.2s steps(1) infinite;
+  }
+
+  &::after {
+    color: var(--accent-highlight);
+    transform: translateX(3px);
+    animation: glitch-b 2.7s steps(1) infinite;
+  }
+}
+
+@keyframes glitch-a {
+  0%,
+  100% {
+    clip-path: inset(0 0 100% 0);
+  }
+  8% {
+    clip-path: inset(12% 0 70% 0);
+  }
+  12% {
+    clip-path: inset(0 0 100% 0);
+  }
+  46% {
+    clip-path: inset(62% 0 18% 0);
+  }
+  50% {
+    clip-path: inset(0 0 100% 0);
+  }
+  78% {
+    clip-path: inset(34% 0 48% 0);
+  }
+  81% {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+@keyframes glitch-b {
+  0%,
+  100% {
+    clip-path: inset(0 0 100% 0);
+  }
+  18% {
+    clip-path: inset(72% 0 8% 0);
+  }
+  22% {
+    clip-path: inset(0 0 100% 0);
+  }
+  58% {
+    clip-path: inset(20% 0 64% 0);
+  }
+  61% {
+    clip-path: inset(0 0 100% 0);
+  }
+  90% {
+    clip-path: inset(48% 0 30% 0);
+  }
+  93% {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid-floor,
+  .glitch-text::before,
+  .glitch-text::after {
+    animation: none;
+  }
+}
+
+/* Parallelogram used by angled cards; slant comes from --card-slant. */
+@utility clip-angled {
+  clip-path: polygon(
+    var(--card-slant) 0,
+    100% 0,
+    calc(100% - var(--card-slant)) 100%,
+    0 100%
+  );
+}
+
+/* Hides the scrollbar on swipe tracks that provide their own controls. */
+@utility scrollbar-hidden {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Hero lighting: fire on the left, ice on the right, matching the logo. */
+@utility hero-glow {
+  background:
+    radial-gradient(
+      45% 55% at 12% 45%,
+      color-mix(in srgb, var(--accent-primary) 22%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      45% 55% at 88% 45%,
+      color-mix(in srgb, var(--accent-cool) 24%, transparent),
+      transparent 70%
+    ),
+    linear-gradient(
+      to bottom,
+      var(--background-surface-raised),
+      var(--background-page)
+    );
+}
+
+/* Darkens the middle of the hero so the headline reads over the side art. */
+@utility hero-vignette {
+  background: radial-gradient(
+    32% 55% at 50% 45%,
+    color-mix(in srgb, var(--background-page) 70%, transparent),
+    transparent 100%
+  );
+}
+
+/*
+ * Periodic light sweep across a heading. The sweep is a 250%-wide gradient
+ * layer clipped to the text and slid across it by the `shine` keyframes.
+ * Gold glint on the white words, white glint on the fire-gradient accent.
+ */
+@utility text-shine {
+  background-image:
+    linear-gradient(
+      110deg,
+      transparent 40%,
+      var(--accent-highlight) 50%,
+      transparent 60%
+    ),
+    linear-gradient(var(--text-primary), var(--text-primary));
+  background-size:
+    250% 100%,
+    100% 100%;
+  background-repeat: no-repeat;
+  background-clip: text;
+  color: transparent;
+  animation: var(--animate-shine);
+
+  & .text-gradient-accent {
+    background-image:
+      linear-gradient(
+        110deg,
+        transparent 40%,
+        color-mix(in srgb, var(--text-primary) 85%, transparent) 50%,
+        transparent 60%
+      ),
+      linear-gradient(
+        180deg,
+        var(--accent-highlight) 0%,
+        var(--accent-primary) 45%,
+        var(--accent-primary-strong) 100%
+      );
+    background-size:
+      250% 100%,
+      100% 100%;
+    background-repeat: no-repeat;
+    animation: inherit;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    & .text-gradient-accent {
+      animation: none;
+    }
+  }
+}
+
+/* Diagonal construction-tape stripes, tiled every 1.75rem (see `stripes`). */
+@utility hazard-stripes {
+  background-image: linear-gradient(
+    45deg,
+    var(--accent-primary) 25%,
+    transparent 25% 50%,
+    var(--accent-primary) 50% 75%,
+    transparent 75%
+  );
+  background-size: 1.75rem 1.75rem;
+}

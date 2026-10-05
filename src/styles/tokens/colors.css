@@ -1,0 +1,31 @@
+/*
+ * Raw colour tokens. Sampled from the Gridstone brand mockup: deep navy
+ * backgrounds, fiery orange as the primary accent, electric blue as the
+ * secondary ("cool") accent — the two halves of the logo.
+ */
+:root {
+  --background-page: #050a16;
+  --background-surface: #0b1426;
+  --background-surface-raised: #11203b;
+
+  --border-subtle: #1c2b4a;
+  --border-strong: #2b4778;
+
+  --text-primary: #ffffff;
+  --text-secondary: #c5cee0;
+  --text-muted: #8d9ab3;
+  /*
+   * Text on orange fills. White on this orange is ~2.6:1, which fails WCAG AA,
+   * so accent fills carry near-black text. Swap here if the brand insists on
+   * white — every accent button follows this one token.
+   */
+  --text-on-accent: #1a0b00;
+
+  --accent-primary: #ff7a14;
+  --accent-primary-strong: #f04e12;
+  --accent-highlight: #ffb43d;
+  --accent-cool: #2f8cff;
+  --accent-cool-bright: #43c6ff;
+
+  --focus-ring: #43c6ff;
+}

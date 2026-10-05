@@ -1,0 +1,16 @@
+export type IconName =
+  | "chevron-left"
+  | "chevron-right"
+  | "close"
+  | "discord"
+  | "external-link"
+  | "flame"
+  | "image"
+  | "menu"
+  | "pause"
+  | "play"
+  | "roblox"
+  | "thumbs-up"
+  | "user"
+  | "x"
+  | "youtube";

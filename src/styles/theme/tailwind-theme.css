@@ -1,0 +1,135 @@
+/* Maps the raw tokens onto Tailwind utilities (bg-surface, text-text-muted…). */
+@theme inline {
+  --color-page: var(--background-page);
+  --color-surface: var(--background-surface);
+  --color-surface-raised: var(--background-surface-raised);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-on-accent: var(--text-on-accent);
+
+  --color-accent: var(--accent-primary);
+  --color-accent-strong: var(--accent-primary-strong);
+  --color-accent-highlight: var(--accent-highlight);
+  --color-cool: var(--accent-cool);
+  --color-cool-bright: var(--accent-cool-bright);
+
+  --font-body: var(--font-geist-sans);
+  --font-heading: var(--font-rajdhani);
+  --font-display: var(--font-exo);
+
+  --radius-control: var(--radius-control);
+  --radius-panel: var(--radius-panel);
+
+  --shadow-glow-accent: var(--shadow-glow-accent);
+  --shadow-glow-cool: var(--shadow-glow-cool);
+
+  /* Card padding that clears the slanted edge of angled cards. */
+  --spacing-card-inset: calc(var(--card-slant) + 0.75rem);
+}
+
+@theme {
+  /* Fluid sizes: the hero and section titles scale with the viewport. The
+     display size also tracks viewport height so the home page fits on one
+     laptop screen (e.g. a MacBook Air) without scrolling. */
+  --text-display: clamp(3.25rem, min(11vw, 9dvh), 7.5rem);
+  --text-display--line-height: 0.9;
+  --text-section: clamp(2.5rem, 4vw, 2.75rem);
+  --text-section--line-height: 0.95;
+
+  --tracking-eyebrow: 0.4em;
+
+  --container-wide: 100rem;
+}
+
+/* Motion tokens. Every animation honours prefers-reduced-motion at its call site. */
+@theme {
+  --ease-entrance: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-rise-in: rise-in 0.8s var(--ease-entrance) both;
+  --animate-fade-in: fade-in 0.8s var(--ease-entrance) both;
+  --animate-enter-from-left: enter-from-left 0.9s var(--ease-entrance) both;
+  --animate-enter-from-right: enter-from-right 0.9s var(--ease-entrance) both;
+  --animate-drop-in: drop-in 0.7s var(--ease-entrance) both;
+  /* One sweep in the first ~1.6s, then a pause before the next. */
+  --animate-shine: shine 5s ease-in-out infinite;
+  /* Under-construction loop: stones drop into place, hold, then clear. */
+  --animate-block-drop: block-drop 4s var(--ease-entrance) infinite;
+  --animate-stripes: stripes 0.8s linear infinite;
+
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes enter-from-left {
+    from {
+      opacity: 0;
+      transform: translateX(-2.5rem);
+    }
+  }
+
+  @keyframes enter-from-right {
+    from {
+      opacity: 0;
+      transform: translateX(2.5rem);
+    }
+  }
+
+  @keyframes drop-in {
+    from {
+      opacity: 0;
+      transform: translateY(-1.5rem);
+    }
+  }
+
+  @keyframes block-drop {
+    0% {
+      opacity: 0;
+      transform: translateY(-140%) scale(0.9);
+    }
+    14%,
+    78% {
+      opacity: 1;
+      transform: none;
+    }
+    92%,
+    100% {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+  }
+
+  /* Shifts the hazard stripes by exactly one tile so the loop is seamless. */
+  @keyframes stripes {
+    to {
+      background-position: 1.75rem 0;
+    }
+  }
+
+  @keyframes shine {
+    0% {
+      background-position:
+        100% 0,
+        0 0;
+    }
+    32%,
+    100% {
+      background-position:
+        0% 0,
+        0 0;
+    }
+  }
+}

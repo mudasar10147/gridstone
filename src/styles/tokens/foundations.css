@@ -1,0 +1,13 @@
+/* Non-colour tokens: shape, depth and brand-specific geometry. */
+:root {
+  --radius-control: 0.5rem;
+  --radius-panel: 1rem;
+
+  --shadow-glow-accent: 0 0 1.5rem
+    color-mix(in srgb, var(--accent-primary) 45%, transparent);
+  --shadow-glow-cool: 0 0 1.5rem
+    color-mix(in srgb, var(--accent-cool) 40%, transparent);
+
+  /* Horizontal offset of the slanted edges on angled cards. */
+  --card-slant: 1rem;
+}

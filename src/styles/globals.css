@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@import "./tokens/colors.css";
+@import "./tokens/foundations.css";
+@import "./theme/tailwind-theme.css";
+@import "./effects.css";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--background-page);
+    color: var(--text-primary);
+    font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  }
+
+  /* One focus treatment for every interactive element. */
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+}
